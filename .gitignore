@@ -8,3 +8,6 @@ media
 
 #PyCharm
 /.idea/**
+
+#Else
+.env
