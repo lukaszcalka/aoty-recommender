@@ -6,6 +6,7 @@ from django.views import generic
 
 from aoty_recommender_website.forms import SignUpForm
 from aoty_recommender_website.models import Album, Artist, Song
+from aoty_recommender_website.scraper import AotyScraper
 
 
 def home_page(request):
@@ -20,6 +21,12 @@ def home_page(request):
         else:
             messages.error(request, "We had a problem while logging you in")
         return render(request, "home.html")
+
+
+def search_albums(request, name):
+    scraper = AotyScraper()
+    img_srcs = scraper.search_albums(name)
+    return render(request, "album_search.html", {"images_srcs": img_srcs})
 
 
 def logout_user(request):
@@ -43,14 +50,15 @@ def register_user(request):
     return render(request, "register.html", {"form": form})
 
 
-
 class SongDetailView(generic.DetailView):
     model = Song
     template_name = "song_details.html"
 
+
 class ArtistDetailView(generic.DetailView):
     model = Artist
     template_name = "artist_details.html"
+
 
 class AlbumDetailView(generic.DetailView):
     model = Album

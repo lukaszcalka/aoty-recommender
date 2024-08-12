@@ -7,6 +7,11 @@
       {% include 'login.html' %}
     {% else %}
       <h1>{{ user.is_authenticated }}</h1>
+      <form action="/your-name/" method="post">
+        <label for="your_name">Your name: </label>
+        <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+        <input type="submit" value="OK">
+    </form>
     {% endif %}
   </div>
 {% endblock %}

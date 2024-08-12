@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'navbar.html' %}
+  {% for img in images_srcs %}
+    <img src="{{ img }}" />
+  {% endfor %}
+{% endblock %}
