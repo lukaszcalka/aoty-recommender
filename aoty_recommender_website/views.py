@@ -1,8 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.views import generic
 
 from aoty_recommender_website.forms import SignUpForm
+from aoty_recommender_website.models import Album, Artist, Song
 
 
 def home_page(request):
@@ -38,3 +41,17 @@ def register_user(request):
         return render(request, "register.html", {"form": form})
 
     return render(request, "register.html", {"form": form})
+
+
+
+class SongDetailView(generic.DetailView):
+    model = Song
+    template_name = "song_details.html"
+
+class ArtistDetailView(generic.DetailView):
+    model = Artist
+    template_name = "artist_details.html"
+
+class AlbumDetailView(generic.DetailView):
+    model = Album
+    template_name = "album_details.html"
